@@ -1,27 +1,44 @@
-class Stack {
+class Queue {
   constructor() {
-    this.arr = [];
-  }
-  push(element) {
-    this.arr.push(element);
+    this.head = null;
+    this.length = 0;
   }
 
-  pop() {
-    const innerEl = this.arr[this.arr.length - 1];
-    this.arr.pop();
-    return innerEl;
+  getUnderlyingList() {
+    return this.head;
   }
 
-  peek() {
-    return this.arr[this.arr.length - 1];
+  enqueue(value) {
+    const listNode = { value: value, next: null };
+
+    if (this.length === 0) {
+      this.head = listNode;
+    } else {
+      let current = this.head;
+
+      while (current.next) {
+        current = current.next;
+      }
+
+      current.next = listNode;
+    }
+
+    this.length += 1;
+  }
+
+  dequeue() {
+    const firstNode = this.head;
+    this.head = this.head.next;
+    this.length -= 1;
+
+    return firstNode.value;
   }
 }
 
-const stack = new Stack();
-stack.push(5);
-stack.push(6);
-stack.push(7);
+const queue = new Queue();
+queue.enqueue(5);
+queue.enqueue(6);
+queue.enqueue(7);
 
-console.log(stack.peek()); // 7
-console.log(stack.pop()); // 7
-console.log(stack.peek()); //6
+console.log(queue.dequeue()); // 5
+console.log(queue.getUnderlyingList()); // возвращает список

@@ -21,9 +21,7 @@ class Stack {
   }
 
   pop() {
-    const innerEl = this.arr[this.arr.length - 1];
-    this.arr.pop();
-    return innerEl;
+    return this.arr.pop();
   }
 
   peek() {
